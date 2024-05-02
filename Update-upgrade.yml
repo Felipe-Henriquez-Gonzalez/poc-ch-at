@@ -1,5 +1,5 @@
 - name: Actualizar todos los nodos 
-  hosts: "{{ hosts }}"
+  hosts: "{{ nodos }}"
   become: yes
   tasks:
     - name: Actualizar los paquetes del sistema
