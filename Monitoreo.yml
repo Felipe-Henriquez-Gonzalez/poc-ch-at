@@ -1,6 +1,6 @@
 ---
 - name: monitorear mex si están encendidos o apagados
-  hosts: "{{ host }}"
+  hosts: "{{ nodos }}"
   gather_facts: no
   tasks:
   - name: Intentar hacer ping a los nodos
