@@ -1,0 +1,17 @@
+---
+- name: monitorear mex si están encendidos o apagados
+  hosts: "{{ host }}"
+  gather_facts: no
+  tasks:
+  - name: Intentar hacer ping a los nodos
+    ping:
+    register: ping_result
+    ignore_errors: yes
+ - name: Mostrar mensaje si el nodo está encendido
+   debug:
+     msg: "El nodo {{ inventory_hostname }} está ENCENDIDO"
+   when: ping_result is succeeded
+  - name: Mostrar mensaje si el nodo está apagado o no es accesible
+    debug:
+      msg: "El nodo {{ inventory_hostname }} está APAGADO o no es accesible"
+    when: ping_result is failed
