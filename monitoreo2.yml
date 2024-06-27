@@ -1,1 +1,13 @@
 ---
+- name: monitorear mex si están encendidos o apagados
+  hosts: "{{ nodos }}"
+  gather_facts: no
+  tasks:
+    - name: Intentar hacer ping a los nodos
+      ping:
+      register: ping_result
+      ignore_errors: yes
+    - name: mostrar status
+      ansible.builtin.debug:
+        msg: "Node {{ inventory_hostname }} - Ping result: {{ ping_result }}"
+     
