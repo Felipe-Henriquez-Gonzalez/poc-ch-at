@@ -1,0 +1,11 @@
+---
+- name: Obtener versión de Linux
+  hosts: all
+  tasks:
+    - name: Ejecutar comando para obtener la versión de Linux
+      command: "cat /etc/*release"
+      register: version_info
+
+    - name: Mostrar resultado
+      debug:
+        msg: "{{ version_info.stdout }}"
