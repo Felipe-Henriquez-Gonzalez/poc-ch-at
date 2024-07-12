@@ -1,0 +1,22 @@
+- name: Encender hosts con Magic Packet
+  hosts: "{{ nodo }}"
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Verificar conectividad con el host
+      ping:
+      register: ping_result
+
+    - name: Enviar Magic Packet solo si el host está apagado
+      command: "python3 -c \"import socket, binascii; mac_address='{{ mac_address }}'; ip_address='{{ inventory_hostname }}'; mac_hex=mac_address.replace(':', '').encode(); packet = b'\\xff'*6 + mac_hex*16; sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1); sock.sendto(packet, ('<broadcast>', 9))\""
+      when: "'unreachable' in ping_result or 'FAILED' in ping_result"
+
+    - name: Esperar un tiempo antes de verificar si los hosts están encendidos
+      pause:
+        seconds: 10
+
+  handlers:
+    - name: Esperar un tiempo antes de verificar si los hosts están encendidos
+      pause:
+        seconds: 10
