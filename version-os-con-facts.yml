@@ -1,6 +1,6 @@
 ---
 - name: Obtener versión de Linux usando facts
-  hosts: tu_servidor
+  hosts: all
   tasks:
     - name: Mostrar versión de Linux
       debug:
