@@ -4,4 +4,4 @@
   tasks:
     - name: Mostrar versión de Linux
       debug:
-        msg: "La versión de Linux es {{ ansible_distribution }} {{ ansible_distribution_version }}"
+        msg: "el nombre de la maquina es {{ ansible_hostname }} y La versión de Linux es {{ ansible_distribution }} {{ ansible_distribution_version }}"
