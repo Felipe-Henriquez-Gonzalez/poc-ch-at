@@ -1,0 +1,7 @@
+---
+- name: Obtener versión de Linux usando facts
+  hosts: tu_servidor
+  tasks:
+    - name: Mostrar versión de Linux
+      debug:
+        msg: "La versión de Linux es {{ ansible_distribution }} {{ ansible_distribution_version }}"
